@@ -23,19 +23,17 @@ export const useNotificationsStore = defineStore('notifications', () => {
   /** ID типа уведомления, выбранного в фильтре */
   const filterCaseID = ref(savedFilterCaseID || CaseID.All)
 
-  /** Неиндексированные типы уведомлений */
-  const cases = computed(() => Object.values(ixCases.value))
+  /** Неиндексированные уведомления */
+  const items = computed(() => Object.values(ixItems.value))
 
   /** Уведомления, отфильтрованные по типу */
   const filteredItems = computed(() => {
     let filteredItems: NotificationWithStatus[] = []
 
-    const items = Object.values(ixItems.value)
-
     if (filterCaseID.value === CaseID.All) {
-      filteredItems = items
+      filteredItems = items.value
     } else {
-      filteredItems = items.filter((item) => item.case === filterCaseID.value)
+      filteredItems = items.value.filter((item) => item.case === filterCaseID.value)
     }
 
     return filteredItems
@@ -91,9 +89,8 @@ export const useNotificationsStore = defineStore('notifications', () => {
   }
 
   return {
-    cases,
+    items,
     ixCases,
-    ixItems,
     filterCaseID,
     filteredItems,
     fetchCases,

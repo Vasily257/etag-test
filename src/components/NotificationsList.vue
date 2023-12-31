@@ -38,7 +38,7 @@ const getTitle = (caseID: CaseID) => {
 
 const getDescription = (item: NotificationWithStatus) => {
   return `${item.cat} (ID ${item.id})`
-} 
+}
 
 const toggleStatus = (itemID: NotificationWithStatus['id']) => {
   emits('notificationClick', itemID)
@@ -62,6 +62,9 @@ const getButtonText = (isRead: boolean) => {
       </BaseButton>
     </li>
   </TransitionGroup>
+  <Transition>
+    <p v-if="!props.items.length" class="loading-text">Загрузка...</p>
+  </Transition>
 </template>
 
 <style scoped lang="scss">
@@ -139,6 +142,18 @@ const getButtonText = (isRead: boolean) => {
   }
 }
 
+.loading-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 20px - 32px - 96px);
+  margin: 0;
+  color: var(--color-text, #8694a7);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: calc(24 / 14);
+}
+
 .list-move,
 .list-enter-active {
   transition: all 0.75s ease;
@@ -149,8 +164,8 @@ const getButtonText = (isRead: boolean) => {
 }
 
 .list-enter-from {
-  opacity: 0;
   transform: translateY(30px);
+  opacity: 0;
 }
 
 .list-leave-to {
