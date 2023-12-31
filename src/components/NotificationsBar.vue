@@ -8,28 +8,49 @@ import { CaseID } from '@/types'
 
 export type NotificationsBarProps = {
   /** ID типа уведомлений в фильтре */
-  filterCaseId?: NotificationCase['id']
-  /** Опции выпадающего списка */
-  dropdownOptions?: string[]
+  filterCaseId: NotificationCase['id']
+  /** Типы уведомлений, индексированные по id */
+  ixCases: Record<string, NotificationCase>
 }
 
 const props = withDefaults(defineProps<NotificationsBarProps>(), {
-  filterCaseId: CaseID.All,
-  dropdownOptions: () => []
+  ixCases: () => ({})
 })
 
 /** Эмиты */
-const emits = defineEmits(['updateFilter', 'clearFilter', 'updateNotificationList'])
+const emits = defineEmits(['updateFilterCaseId', 'updateNotificationList'])
 
 /** Текст неактивного фильтра */
 const NO_FILTER = 'Тип уведомления'
 
-/** Текущий фильтр */
-const currentFilter = ref(NO_FILTER)
+/** Текст в фильтре */
+const filterText = ref(NO_FILTER)
+
+const cases = computed(() => {
+  return Object.values(props.ixCases) || []
+})
+
+/** Описания типов уведомлений */
+const caseDescriptions = computed(() => {
+  return cases.value.map((caseItem) => caseItem.description)
+})
 
 /** Активен ли фильтр */
 const isActiveFilter = computed(() => {
   return props.filterCaseId !== CaseID.All
+})
+
+/** Новое значение фильтра */
+const newFilterCaseId = computed(() => {
+  let newFilterCaseId = CaseID.All
+
+  const currentCase = cases.value.find((itemCase) => itemCase.description === filterText.value)
+
+  if (currentCase?.id) {
+    newFilterCaseId = currentCase.id
+  }
+
+  return newFilterCaseId
 })
 
 /** Обновить список уведомлений */
@@ -39,26 +60,30 @@ const updateNotificationList = () => {
 
 /** Очистить фильтр */
 const clearFilter = () => {
-  emits('clearFilter')
-  currentFilter.value = NO_FILTER
+  emits('updateFilterCaseId', CaseID.All)
 }
 
+// Поменять текст в фильтре, если изменился ID фильтра
+watch(props, () => {
+  if (props.filterCaseId === CaseID.All) {
+    filterText.value = NO_FILTER
+  } else {
+    filterText.value = props.ixCases[props.filterCaseId]?.description || ''
+  }
+})
+
 // Обновить фильтр, если его значение поменялось внутри выпадающего меню
-watch(
-  currentFilter,
-  () => {
-    emits('updateFilter', currentFilter.value)
-  },
-  { immediate: true }
-)
+watch(filterText, () => {
+  emits('updateFilterCaseId', newFilterCaseId.value)
+})
 </script>
 
 <template>
   <div class="notifications-bar">
     <BaseDropdown
       id="notifications-bar-dropdown"
-      v-model="currentFilter"
-      :options="dropdownOptions"
+      v-model="filterText"
+      :options="caseDescriptions"
       is-filter
       :is-active-filter="isActiveFilter"
       variant="regular"

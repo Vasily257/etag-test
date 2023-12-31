@@ -8,6 +8,12 @@ import casesJSON from '../../../database/cases.json'
 import listJSON from '../../../database/list.json'
 
 export const useNotificationsStore = defineStore('notifications', () => {
+  /** Ключ фильтра в локальном хранилище */
+  const FILTER_CASE_ID_KEY = 'filterCaseID'
+
+  /** Фильтр, сохраненный в локальном хранилище */
+  const savedFilterCaseID = Number(localStorage.getItem(FILTER_CASE_ID_KEY))
+
   /** Типы уведомлений, индексированные по id */
   const ixCases = ref<Record<string, NotificationCase>>({})
 
@@ -15,7 +21,7 @@ export const useNotificationsStore = defineStore('notifications', () => {
   const ixItems = ref<Record<string, NotificationWithStatus>>({})
 
   /** ID типа уведомления, выбранного в фильтре */
-  const filterCaseID = ref(CaseID.All)
+  const filterCaseID = ref(savedFilterCaseID || CaseID.All)
 
   /** Неиндексированные типы уведомлений */
   const cases = computed(() => Object.values(ixCases.value))
@@ -67,9 +73,16 @@ export const useNotificationsStore = defineStore('notifications', () => {
     }
   }
 
+  /** Сохранить фильтр в локальном хранилище */
+  const saveFilterToLocalStorage = (caseID: CaseID) => {
+    localStorage.setItem(FILTER_CASE_ID_KEY, String(caseID))
+  }
+
   /** Обновить фильтр */
   const updateFilter = (caseID: CaseID) => {
     filterCaseID.value = caseID
+
+    saveFilterToLocalStorage(caseID)
   }
 
   /** Переключить статус прочтения уведомления */
