@@ -1,4 +1,7 @@
 import type { Notification, NotificationWithStatus } from '@/types'
+import { useNotificationStatuses } from '@/composables/statuses'
+
+const { getStatus } = useNotificationStatuses()
 
 /**
  * Получить индексированный список уведомлений, расширенных статусом прочтения
@@ -7,7 +10,7 @@ import type { Notification, NotificationWithStatus } from '@/types'
 const getIxNotificationsWithStatus = (items: Notification[]) => {
   const ixItemsWithStatus: Record<string, NotificationWithStatus> = {}
 
-  const itemsWithStatus = items.map((item) => ({ ...item, isRead: false }))
+  const itemsWithStatus = items.map((item) => ({ ...item, isRead: getStatus(item.id) }))
 
   itemsWithStatus.forEach((item) => {
     ixItemsWithStatus[item.id] = item

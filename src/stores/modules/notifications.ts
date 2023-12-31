@@ -3,6 +3,9 @@ import { defineStore } from 'pinia'
 import { getNotificationCases, getNotificationItems } from '@/api'
 import { getIxCases, getIxNotificationsWithStatus } from '../converters'
 import { CaseID, type NotificationCase, type NotificationWithStatus } from '@/types'
+import { useNotificationStatuses } from '@/composables/statuses'
+
+const { setStatus } = useNotificationStatuses()
 
 import casesJSON from '../../../database/cases.json'
 import listJSON from '../../../database/list.json'
@@ -88,13 +91,18 @@ export const useNotificationsStore = defineStore('notifications', () => {
     saveFilterToLocalStorage(caseID)
   }
 
-  /** Переключить статус прочтения уведомления */
+  /** Переключить статус уведомления */
   const toggleNotificationStatus = (notificationID: NotificationWithStatus['id']) => {
-    ixItems.value[notificationID].isRead = !ixItems.value[notificationID].isRead
+    const newStatus = !ixItems.value[notificationID].isRead
+
+    ixItems.value[notificationID].isRead = newStatus
+
+    setStatus(notificationID, newStatus)
   }
 
   return {
     ixCases,
+    items,
     filterCaseID,
     filteredItems,
     fetchCases,

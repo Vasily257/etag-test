@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import NotificationsBar from './NotificationsBar.vue'
 import NotificationsList from './NotificationsList.vue'
 import { useNotificationsStore } from '@/stores/modules/notifications'
+import { useNotificationStatuses } from '@/composables/statuses'
 
 const store = useNotificationsStore()
-const { ixCases, filterCaseID, filteredItems } = storeToRefs(store)
+const { ixCases, items, filterCaseID, filteredItems } = storeToRefs(store)
 const { fetchCases, fetchItems, clearItems, updateFilter, toggleNotificationStatus } = store
+
+const { setInitialStatuses } = useNotificationStatuses()
 
 /** Время для имитации ответа от сервера */
 const SERVER_RESPONSE_DELAY = 1000
@@ -31,6 +34,10 @@ onMounted(() => {
     await fetchCases()
     await fetchItems()
   }, SERVER_RESPONSE_DELAY)
+})
+
+watch(items, () => {
+  setInitialStatuses(items.value)
 })
 </script>
 
