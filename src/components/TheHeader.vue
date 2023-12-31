@@ -12,6 +12,14 @@ const isItems = computed(() => {
   return Boolean(filteredItems.value.length)
 })
 
+/** CSS-классы описания */
+const descriptionClass = computed(() => {
+  return {
+    header__description: true,
+    'header__description--transparent': !isItems.value
+  }
+})
+
 /** Подобрать правильную форму для слова "изменения" */
 const pluralizeChangeWord = (count: number) => {
   return pluralize(count, ['изменение', 'изменения', 'изменений'])
@@ -21,9 +29,7 @@ const pluralizeChangeWord = (count: number) => {
 <template>
   <header class="header">
     <h1 class="header__title">Уведомления</h1>
-    <p v-if="isItems" class="header__description">
-      Показано {{ pluralizeChangeWord(filteredItems.length) }}
-    </p>
+    <p :class="descriptionClass">Показано {{ pluralizeChangeWord(filteredItems.length) }}</p>
   </header>
 </template>
 
@@ -50,7 +56,10 @@ const pluralizeChangeWord = (count: number) => {
     font-size: 12px;
     font-weight: 400;
     line-height: calc(16 / 12);
+
+    &--transparent {
+      color: transparent;
+    }
   }
 }
 </style>
-@/stores/modules/notifications
