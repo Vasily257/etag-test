@@ -64,13 +64,19 @@ const clearFilter = () => {
 }
 
 // Поменять текст в фильтре, если изменился ID фильтра
-watch(props, () => {
-  if (props.filterCaseId === CaseID.All) {
-    filterText.value = NO_FILTER
-  } else {
-    filterText.value = props.ixCases[props.filterCaseId]?.description || ''
+watch(
+  props,
+  () => {
+    if (props.filterCaseId === CaseID.All) {
+      filterText.value = NO_FILTER
+    } else {
+      filterText.value = props.ixCases[props.filterCaseId]?.description || ''
+    }
+  },
+  {
+    immediate: true
   }
-})
+)
 
 // Обновить фильтр, если его значение поменялось внутри выпадающего меню
 watch(filterText, () => {
