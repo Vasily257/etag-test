@@ -362,8 +362,8 @@ onBeforeUnmount(() => {
     }
 
     &--active {
-      border-color: var(--color-primary, #754eff);
       color: var(--color-primary, #754eff);
+      border-color: var(--color-primary, #754eff);
     }
 
     &--placeholder {
@@ -423,9 +423,10 @@ onBeforeUnmount(() => {
     margin: 0;
     padding: 0;
     list-style-type: none;
+    border: 1px solid var(--color-border, #e4ebf4);
     border-radius: 15px;
     background-color: #ffffff;
-    box-shadow: 0 0 6px 0 rgba(148, 181, 225, 0.35);
+    box-shadow: 0 10px 20px 0 rgba(186, 197, 211, 0.15);
     font-weight: 400;
   }
 
@@ -435,7 +436,7 @@ onBeforeUnmount(() => {
 
   &__item-button {
     width: 100%;
-    padding: 8px 36px;
+    padding: 14px 36px;
     color: var(--color-heading, #2b3f57);
     border: none;
     border-radius: 0;
@@ -446,7 +447,7 @@ onBeforeUnmount(() => {
     &:focus {
       border-color: transparent;
       outline: none;
-      background-color: #eaf2fd;
+      background-color: var(--color-background, #fcfdfe);
     }
 
     &--first {
