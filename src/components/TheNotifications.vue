@@ -6,16 +6,11 @@ import NotificationsList from './NotificationsList.vue'
 import { useNotificationsStore } from '@/stores/modules/notifications'
 
 const store = useNotificationsStore()
-const { items, ixCases, filterCaseID, filteredItems } = storeToRefs(store)
+const { ixCases, filterCaseID, filteredItems } = storeToRefs(store)
 const { fetchCases, fetchItems, clearItems, updateFilter, toggleNotificationStatus } = store
 
 /** Время для имитации ответа от сервера */
 const SERVER_RESPONSE_DELAY = 1000
-
-/** Есть ли хотя бы одно отображаемое уведомление */
-const isItems = computed(() => {
-  return Boolean(items.value.length)
-})
 
 /** Есть ли хотя бы одно отображаемое уведомление */
 const isFilteredItems = computed(() => {
@@ -43,7 +38,7 @@ onMounted(() => {
   <div class="notifications">
     <Transition>
       <NotificationsBar
-        v-if="isItems && isFilteredItems"
+        v-if="isFilteredItems"
         :filter-case-id="filterCaseID"
         :ix-cases="ixCases"
         @update-filter-case-id="updateFilter"

@@ -2,6 +2,8 @@
 @import './fonts.css';
 
 #app {
+  width: 100%;
+  max-width: 1376px;
   padding: 0 16px;
 }
 
@@ -9,4 +11,14 @@
   #app {
     padding: 0 32px;
   }
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.25s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }

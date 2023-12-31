@@ -143,11 +143,14 @@ const getButtonText = (isRead: boolean) => {
 }
 
 .loading-text {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 20px - 32px - 96px);
-  margin: 0;
   color: var(--color-text, #8694a7);
   font-size: 14px;
   font-weight: 600;
