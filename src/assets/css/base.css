@@ -1,0 +1,31 @@
+/* semantic color variables for this project */
+:root {
+  --color-background: #fcfdfe;
+  --color-border: #e4ebf4;
+  --color-heading: #2b3f57;
+  --color-primary: #754eff;
+  --color-text: #8694a7;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--color-text);
+  background: #ffffff;
+  font-family: Nunito Sans,
+  Arial,
+  Helvetica,
+  sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}

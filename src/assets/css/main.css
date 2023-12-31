@@ -1,0 +1,12 @@
+@import './base.css';
+@import './fonts.css';
+
+#app {
+  padding: 0 16px;
+}
+
+@media (min-width: 1024px) {
+  #app {
+    padding: 0 32px;
+  }
+}

@@ -1,0 +1,25 @@
+<svg width="0" height="0" class="hidden">
+  <symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" id="arrowdown">
+    <path d="M12 7L8 11L4 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" id="cleaned">
+    <path stroke="#754EFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14 13 4 4M14 17l4-4M18 9V5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h6M6 7v5"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" id="newcat">
+    <path stroke="#11D799" stroke-width="2" d="M3 7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"></path>
+    <path stroke="#11D799" stroke-linecap="round" stroke-width="2" d="M7 4V3a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1"></path>
+    <path stroke="#11D799" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V9"></path>
+    <circle cx="10" cy="14" r="1" fill="#11D799"></circle>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" id="newlocation">
+    <path stroke="#2ED0F5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5h5M15 2l3 3-3 3M18 10v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4M6 9h4M6 13h7"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" id="notfound">
+    <path stroke="#FF5358" stroke-linecap="round" stroke-width="2" d="M15 11.542V11.5a1.5 1.5 0 0 1 1.5-1.5v0a1.5 1.5 0 0 1 1.5 1.5v1.167c0 .736-.597 1.333-1.333 1.333v0a.667.667 0 0 0-.667.667V15"></path>
+    <circle cx="16" cy="18" r="1" fill="#FF5358"></circle>
+    <path stroke="#FF5358" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 6V5a2 2 0 0 0-2-2H3a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9M5 11h4M5 7h7"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="update">
+    <path fill="#BAC5D3" fill-rule="evenodd" d="M5.74 4a.9.9 0 0 0-.9.9v3.375a.9.9 0 0 0 .9.9h3.375a.9.9 0 0 0 0-1.8H7.682A5.85 5.85 0 0 1 17.5 11.65a.9.9 0 0 0 1.8 0A7.65 7.65 0 0 0 11.65 4a7.65 7.65 0 0 0-5.01 1.887V4.9a.9.9 0 0 0-.9-.9ZM4.9 10.75a.9.9 0 0 0-.9.9 7.65 7.65 0 0 0 12.66 5.76v.99a.9.9 0 1 0 1.8 0v-3.376a.9.9 0 0 0-.873-.891l-.005.15v-.15h-3.397a.9.9 0 1 0 0 1.8h1.433A5.85 5.85 0 0 1 5.8 11.65a.9.9 0 0 0-.9-.9Z" clip-rule="evenodd"></path>
+  </symbol>
+</svg>
