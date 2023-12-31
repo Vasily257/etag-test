@@ -6,13 +6,15 @@ import BaseIcon from './BaseIcon.vue'
 import type { NotificationCase } from '@/types'
 import { CaseID } from '@/types'
 
+/** Типы пропсов */
 export type NotificationsBarProps = {
   /** ID типа уведомлений в фильтре */
   filterCaseId: NotificationCase['id']
   /** Типы уведомлений, индексированные по id */
-  ixCases: Record<string, NotificationCase>
+  ixCases?: Record<string, NotificationCase>
 }
 
+/** Пропсы со значениями по умолчанию */
 const props = withDefaults(defineProps<NotificationsBarProps>(), {
   ixCases: () => ({})
 })

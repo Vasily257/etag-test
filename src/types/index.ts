@@ -25,4 +25,5 @@ export type Notification = {
 /** Уведомление со статусом прочтения */
 export type NotificationWithStatus = Notification & { isRead: boolean }
 
+/** Статусы прочтения уведомлений в формате для localStorage */
 export type IxNotificationStatuses = Record<string, '0' | '1'>

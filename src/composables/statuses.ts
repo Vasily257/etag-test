@@ -2,8 +2,13 @@ import type { NotificationWithStatus, IxNotificationStatuses } from '@/types'
 
 /** Хук для управления статусами уведомлений */
 export function useNotificationStatuses() {
+  /** Ключ статусов уведомлений в локальном хранилище */
   const NOTIFICATION_STATUSES_KEY = 'notificationStatuses'
 
+  /**
+   * Установить начальные статусы прочтения в localStorage
+   * @param items уведомления
+   */
   const setInitialStatuses = (items: NotificationWithStatus[]) => {
     const ixStatuses: IxNotificationStatuses = {}
 
@@ -18,6 +23,10 @@ export function useNotificationStatuses() {
     }
   }
 
+  /**
+   * Установить статус уведомления в localStorage
+   * @param itemId id уведомления
+   */
   const setStatus = (
     itemId: NotificationWithStatus['id'],
     status: NotificationWithStatus['isRead']
@@ -36,6 +45,10 @@ export function useNotificationStatuses() {
     }
   }
 
+  /**
+   * Получить статус уведомления из localStorage
+   * @param itemId id уведомления
+   */
   const getStatus = (itemId: NotificationWithStatus['id']) => {
     let status = false
 

@@ -3,6 +3,7 @@ import BaseButton from './BaseButton.vue'
 import BaseIcon from './BaseIcon.vue'
 import type { NotificationCase, CaseID, NotificationWithStatus } from '@/types'
 
+/** Типы пропсов */
 export type NotificationsListProps = {
   /** Типы уведомлений, индексированные по id */
   ixCases?: Record<string, NotificationCase>
@@ -10,6 +11,7 @@ export type NotificationsListProps = {
   items?: NotificationWithStatus[]
 }
 
+/** Пропсы со значениями по умолчанию */
 const props = withDefaults(defineProps<NotificationsListProps>(), {
   ixCases: () => ({}),
   items: () => []
@@ -28,22 +30,27 @@ const getItemClass = (itemIndex: number, itemReadStatus: NotificationWithStatus[
   }
 }
 
+/** Получить название иконки */
 const getIconName = (caseID: CaseID) => {
   return props.ixCases[caseID].code
 }
 
+/** Получить отображаемое название уведомления */
 const getTitle = (caseID: CaseID) => {
   return props.ixCases[caseID].description
 }
 
+/** Получить дополнительный текст уведомления */
 const getDescription = (item: NotificationWithStatus) => {
   return `${item.cat} (ID ${item.id})`
 }
 
+/** Переключить статус уведомления */
 const toggleStatus = (itemID: NotificationWithStatus['id']) => {
   emits('notificationClick', itemID)
 }
 
+/** Получить текст кнопки, которая переключает статус прочтения */
 const getButtonText = (isRead: boolean) => {
   return isRead ? 'Прочитать' : 'Отметить непрочитанным'
 }

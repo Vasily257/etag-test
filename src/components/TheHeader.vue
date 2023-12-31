@@ -7,8 +7,8 @@ import pluralize from '@/utils/pluralize'
 const store = useNotificationsStore()
 const { filteredItems } = storeToRefs(store)
 
-/** Есть ли хотя бы одно отображаемое уведомление */
-const isItems = computed(() => {
+/** Есть ли хотя бы одно отображаемое отфильтрованное уведомление */
+const isFilteredItems = computed(() => {
   return Boolean(filteredItems.value.length)
 })
 
@@ -22,7 +22,7 @@ const pluralizeChangeWord = (count: number) => {
   <header class="header">
     <h1 class="header__title">Уведомления</h1>
     <Transition>
-      <p v-if="isItems" class="header__description">
+      <p v-if="isFilteredItems" class="header__description">
         Показано {{ pluralizeChangeWord(filteredItems.length) }}
       </p>
     </Transition>

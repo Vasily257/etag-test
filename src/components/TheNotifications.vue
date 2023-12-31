@@ -15,7 +15,7 @@ const { setInitialStatuses } = useNotificationStatuses()
 /** Время для имитации ответа от сервера */
 const SERVER_RESPONSE_DELAY = 1000
 
-/** Есть ли хотя бы одно отображаемое уведомление */
+/** Есть ли хотя бы одно отображаемое отфильтрованное уведомление */
 const isFilteredItems = computed(() => {
   return Boolean(filteredItems.value.length)
 })

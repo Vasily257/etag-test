@@ -5,10 +5,10 @@ import { getIxCases, getIxNotificationsWithStatus } from '../converters'
 import { CaseID, type NotificationCase, type NotificationWithStatus } from '@/types'
 import { useNotificationStatuses } from '@/composables/statuses'
 
-const { setStatus } = useNotificationStatuses()
-
 import casesJSON from '../../../database/cases.json'
 import listJSON from '../../../database/list.json'
+
+const { setStatus } = useNotificationStatuses()
 
 export const useNotificationsStore = defineStore('notifications', () => {
   /** Ключ фильтра в локальном хранилище */
