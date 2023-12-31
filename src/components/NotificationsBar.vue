@@ -107,7 +107,7 @@ watch(filterText, () => {
       class="notifications-bar__update-button"
       @button-click="updateNotificationList"
     >
-      <BaseIcon icon-name="update" />
+      <BaseIcon icon-name="update" class="notifications-bar__update-button-icon" />
     </BaseButton>
   </div>
 </template>
@@ -131,6 +131,11 @@ watch(filterText, () => {
 
   &__update-button {
     margin-left: auto;
+  }
+
+  &__update-button-icon {
+    width: 24px;
+    height: 24px;
   }
 }
 </style>

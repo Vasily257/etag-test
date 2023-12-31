@@ -71,6 +71,11 @@ export const useNotificationsStore = defineStore('notifications', () => {
     }
   }
 
+  /** Очистить список уведомлений */
+  const clearItems = () => {
+    ixItems.value = {}
+  }
+
   /** Сохранить фильтр в локальном хранилище */
   const saveFilterToLocalStorage = (caseID: CaseID) => {
     localStorage.setItem(FILTER_CASE_ID_KEY, String(caseID))
@@ -95,6 +100,7 @@ export const useNotificationsStore = defineStore('notifications', () => {
     filteredItems,
     fetchCases,
     fetchItems,
+    clearItems,
     updateFilter,
     toggleNotificationStatus
   }

@@ -7,7 +7,10 @@ import { useNotificationsStore } from '@/stores/modules/notifications'
 
 const store = useNotificationsStore()
 const { items, ixCases, filterCaseID, filteredItems } = storeToRefs(store)
-const { fetchCases, fetchItems, updateFilter, toggleNotificationStatus } = store
+const { fetchCases, fetchItems, clearItems, updateFilter, toggleNotificationStatus } = store
+
+/** Время для имитации ответа от сервера */
+const SERVER_RESPONSE_DELAY = 1000
 
 /** Есть ли хотя бы одно отображаемое уведомление */
 const isItems = computed(() => {
@@ -21,12 +24,18 @@ const isFilteredItems = computed(() => {
 
 /** Обновить список уведомлений */
 const updateNotificationList = async () => {
-  await fetchItems()
+  clearItems()
+
+  setTimeout(async () => {
+    await fetchItems()
+  }, SERVER_RESPONSE_DELAY)
 }
 
-onMounted(async () => {
-  await fetchCases()
-  await fetchItems()
+onMounted(() => {
+  setTimeout(async () => {
+    await fetchCases()
+    await fetchItems()
+  }, SERVER_RESPONSE_DELAY)
 })
 </script>
 
