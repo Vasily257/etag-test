@@ -1,52 +1,29 @@
-# test-e-tag
+# Notification list
+Этот проект — тестовое задание для вакансии «Frontend developer» компании [Цифровые технологии ритейла](https://e-tag.pro/).  
 
-This template should help get you started developing with Vue 3 in Vite.
+## Функциональность
+Проект является одностраничным списком уведомлений, которые можно фильтровать по типу.  
 
-## Recommended IDE Setup
+## Особенности
+У проекта есть несколько особенностей:
+1. Проект написан на `Vue 3`, используется `Composition API` и `script setup`, а также `Pinia`.
+2. Код по возможности соответствует [рекомендациям Vue](https://v3.ru.vuejs.org/ru/style-guide/).
+3. Обращение к стору вынесено в родительский компонент, чтобы сохранить дочерние компоненты чистыми.
+4. Приложение сохраняет своё состояние — выбранный фильтр и статусы уведомлений — в `local storage`. 
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-## Type Support for `.vue` Imports in TS
+## Технологический стек
+`Vue` `SCSS` `TypeScript` `Vite`  
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+## Ссылки
+Опубликованый сайт: https://notification-list.netlify.app/  
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## Использование
+Чтобы склонировать проект, надо открыть выбранную папку и использовать команду:  
+**HTTPS**: `git clone https://github.com/Vasily257/notification-list.git`  
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+Чтобы запустить проект, нужно использовать команду `npm run dev` в папке с проектом.  
+Потом надо перейти по ссылке http://localhost:5173/ в браузере, чтобы увидеть результат.
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+## Статус
+Проект завершен, нет планов по доработке.
