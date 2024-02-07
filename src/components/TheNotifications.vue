@@ -1,3 +1,22 @@
+<template>
+  <div class="notifications">
+    <Transition>
+      <NotificationsBar
+        v-if="hasVisibleFilteredNotifications"
+        :filter-case-id="filterCaseID"
+        :ix-cases="notificationCasesByID"
+        @update-filter-case-id="setFilterCaseID"
+        @update-notification-list="refreshNotificationsList"
+      />
+    </Transition>
+    <NotificationsList
+      :ix-cases="notificationCasesByID"
+      :items="notificationsFilteredByCase"
+      @notification-click="toggleNotificationReadStatus"
+    />
+  </div>
+</template>
+
 <script setup lang="ts">
 import { computed, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia'
@@ -7,8 +26,21 @@ import { useNotificationsStore } from '@/stores/modules/notifications'
 import { useNotificationStatuses } from '@/composables/statuses'
 
 const store = useNotificationsStore()
-const { ixCases, items, filterCaseID, filteredItems } = storeToRefs(store)
-const { fetchCases, fetchItems, clearItems, updateFilter, toggleNotificationStatus } = store
+
+const {
+  notifications,
+  filterCaseID,
+  notificationCasesByID,
+  notificationsFilteredByCase
+} = storeToRefs(store)
+
+const {
+  clearNotifications,
+  loadNotifications,
+  loadNotificationCases,
+  setFilterCaseID,
+  toggleNotificationReadStatus
+} = store
 
 const { setInitialStatuses } = useNotificationStatuses()
 
@@ -16,49 +48,30 @@ const { setInitialStatuses } = useNotificationStatuses()
 const SERVER_RESPONSE_DELAY = 300
 
 /** Есть ли хотя бы одно отображаемое отфильтрованное уведомление */
-const isFilteredItems = computed(() => {
-  return Boolean(filteredItems.value.length)
+const hasVisibleFilteredNotifications = computed(() => {
+  return Boolean(notifications.value.length)
 })
 
 /** Обновить список уведомлений */
-const updateNotificationList = async () => {
-  clearItems()
+const refreshNotificationsList = async () => {
+  clearNotifications()
 
   setTimeout(async () => {
-    await fetchItems()
+    await loadNotifications()
   }, SERVER_RESPONSE_DELAY)
 }
 
 onMounted(() => {
   setTimeout(async () => {
-    await fetchCases()
-    await fetchItems()
+    await loadNotificationCases()
+    await loadNotifications()
   }, SERVER_RESPONSE_DELAY)
 })
 
-watch(items, () => {
-  setInitialStatuses(items.value)
+watch(notifications, () => {
+  setInitialStatuses(notifications.value)
 })
 </script>
-
-<template>
-  <div class="notifications">
-    <Transition>
-      <NotificationsBar
-        v-if="isFilteredItems"
-        :filter-case-id="filterCaseID"
-        :ix-cases="ixCases"
-        @update-filter-case-id="updateFilter"
-        @update-notification-list="updateNotificationList"
-      />
-    </Transition>
-    <NotificationsList
-      :ix-cases="ixCases"
-      :items="filteredItems"
-      @notification-click="toggleNotificationStatus"
-    />
-  </div>
-</template>
 
 <style scoped lang="scss">
 .notifications {

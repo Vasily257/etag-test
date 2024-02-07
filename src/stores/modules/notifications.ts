@@ -18,97 +18,97 @@ export const useNotificationsStore = defineStore('notifications', () => {
   const savedFilterCaseID = Number(localStorage.getItem(FILTER_CASE_ID_KEY))
 
   /** Типы уведомлений, индексированные по id */
-  const ixCases = ref<Record<string, NotificationCase>>({})
+  const notificationCasesByID = ref<Record<string, NotificationCase>>({})
 
   /** Уведомления, индексированные по id  */
-  const ixItems = ref<Record<string, NotificationWithStatus>>({})
+  const notificationsByID = ref<Record<string, NotificationWithStatus>>({})
 
   /** ID типа уведомления, выбранного в фильтре */
   const filterCaseID = ref(savedFilterCaseID || CaseID.All)
 
   /** Неиндексированные уведомления */
-  const items = computed(() => Object.values(ixItems.value))
+  const notifications = computed(() => Object.values(notificationsByID.value))
 
   /** Уведомления, отфильтрованные по типу */
-  const filteredItems = computed(() => {
+  const notificationsFilteredByCase = computed(() => {
     let filteredItems: NotificationWithStatus[] = []
 
     if (filterCaseID.value === CaseID.All) {
-      filteredItems = items.value
+      filteredItems = notifications.value
     } else {
-      filteredItems = items.value.filter((item) => item.case === filterCaseID.value)
+      filteredItems = notifications.value.filter((item) => item.case === filterCaseID.value)
     }
 
     return filteredItems
   })
 
   /** Получить типы уведомлений с сервера */
-  const fetchCases = async () => {
+  const loadNotificationCases = async () => {
     try {
       const { data } = await getNotificationCases()
 
       if (data?.length > 0) {
-        ixCases.value = { ...getIxCases(data) }
+        notificationCasesByID.value = { ...getIxCases(data) }
       }
     } catch (error) {
       console.log(error)
 
       // На случай, если в браузере включен CORS
-      ixCases.value = { ...getIxCases(casesJSON) }
+      notificationCasesByID.value = { ...getIxCases(casesJSON) }
     }
   }
 
   /** Получить список уведомлений с сервера */
-  const fetchItems = async () => {
+  const loadNotifications = async () => {
     try {
       const { data } = await getNotificationItems()
 
       if (data?.length > 0) {
-        ixItems.value = { ...getIxNotificationsWithStatus(data) }
+        notificationsByID.value = { ...getIxNotificationsWithStatus(data) }
       }
     } catch (error) {
       console.log(error)
 
       // На случай, если в браузере включен CORS
-      ixItems.value = { ...getIxNotificationsWithStatus(listJSON) }
+      notificationsByID.value = { ...getIxNotificationsWithStatus(listJSON) }
     }
   }
 
   /** Очистить список уведомлений */
-  const clearItems = () => {
-    ixItems.value = {}
+  const clearNotifications = () => {
+    notificationsByID.value = {}
   }
 
   /** Сохранить фильтр в локальном хранилище */
-  const saveFilterToLocalStorage = (caseID: CaseID) => {
+  const saveFilterCaseIDToLocalStorage = (caseID: CaseID) => {
     localStorage.setItem(FILTER_CASE_ID_KEY, String(caseID))
   }
 
   /** Обновить фильтр */
-  const updateFilter = (caseID: CaseID) => {
+  const setFilterCaseID = (caseID: CaseID) => {
     filterCaseID.value = caseID
 
-    saveFilterToLocalStorage(caseID)
+    saveFilterCaseIDToLocalStorage(caseID)
   }
 
-  /** Переключить статус уведомления */
-  const toggleNotificationStatus = (notificationID: NotificationWithStatus['id']) => {
-    const newStatus = !ixItems.value[notificationID].isRead
+  /** Переключить статус прочтения уведомления */
+  const toggleNotificationReadStatus = (notificationID: NotificationWithStatus['id']) => {
+    const newStatus = !notificationsByID.value[notificationID].isRead
 
-    ixItems.value[notificationID].isRead = newStatus
+    notificationsByID.value[notificationID].isRead = newStatus
 
     setStatus(notificationID, newStatus)
   }
 
   return {
-    ixCases,
-    items,
+    notificationCasesByID,
+    notifications,
     filterCaseID,
-    filteredItems,
-    fetchCases,
-    fetchItems,
-    clearItems,
-    updateFilter,
-    toggleNotificationStatus
+    notificationsFilteredByCase,
+    loadNotificationCases,
+    loadNotifications,
+    clearNotifications,
+    setFilterCaseID,
+    toggleNotificationReadStatus
   }
 })

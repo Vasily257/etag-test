@@ -1,3 +1,14 @@
+<template>
+  <header class="header">
+    <h1 class="header__title">Уведомления</h1>
+    <Transition>
+      <p v-if="hasVisibleFilteredNotifications" class="header__description">
+        Показано {{ getChangeWordForm(notificationsFilteredByCase.length) }}
+      </p>
+    </Transition>
+  </header>
+</template>
+
 <script setup lang="ts">
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
@@ -5,29 +16,18 @@ import { useNotificationsStore } from '@/stores/modules/notifications'
 import pluralize from '@/utils/pluralize'
 
 const store = useNotificationsStore()
-const { filteredItems } = storeToRefs(store)
+const { notifications, notificationsFilteredByCase } = storeToRefs(store)
 
 /** Есть ли хотя бы одно отображаемое отфильтрованное уведомление */
-const isFilteredItems = computed(() => {
-  return Boolean(filteredItems.value.length)
+const hasVisibleFilteredNotifications = computed(() => {
+  return Boolean(notifications.value.length)
 })
 
 /** Подобрать правильную форму для слова "изменения" */
-const pluralizeChangeWord = (count: number) => {
+const getChangeWordForm = (count: number) => {
   return pluralize(count, ['изменение', 'изменения', 'изменений'])
 }
 </script>
-
-<template>
-  <header class="header">
-    <h1 class="header__title">Уведомления</h1>
-    <Transition>
-      <p v-if="isFilteredItems" class="header__description">
-        Показано {{ pluralizeChangeWord(filteredItems.length) }}
-      </p>
-    </Transition>
-  </header>
-</template>
 
 <style scoped lang="scss">
 .header {
