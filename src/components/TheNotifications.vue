@@ -13,7 +13,7 @@ const { fetchCases, fetchItems, clearItems, updateFilter, toggleNotificationStat
 const { setInitialStatuses } = useNotificationStatuses()
 
 /** Время для имитации ответа от сервера */
-const SERVER_RESPONSE_DELAY = 1000
+const SERVER_RESPONSE_DELAY = 300
 
 /** Есть ли хотя бы одно отображаемое отфильтрованное уведомление */
 const isFilteredItems = computed(() => {
