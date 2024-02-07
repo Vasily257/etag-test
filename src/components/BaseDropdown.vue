@@ -143,7 +143,7 @@ const handlePrincipalButtonClick = () => {
  * Обработать клик по кнопке меню
  * @param event событие мыши
  */
-const handleMenuButtonClick = (event: MouseEvent) => {
+const handleMenuButtonClick = (event: Event) => {
   if (event.target instanceof HTMLButtonElement) {
     const buttonElement = event.target
 

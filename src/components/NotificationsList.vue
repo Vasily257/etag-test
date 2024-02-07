@@ -64,7 +64,11 @@ const getButtonText = (isRead: boolean) => {
         <h2 class="notifications-list__item-title">{{ getTitle(item.case) }}</h2>
         <p class="notifications-list__item-description">{{ getDescription(item) }}</p>
       </div>
-      <BaseButton class="notifications-list__item-button" @button-click="toggleStatus(item.id)">
+      <BaseButton
+        variant="regular"
+        class="notifications-list__item-button"
+        @click="toggleStatus(item.id)"
+      >
         {{ getButtonText(item.isRead) }}
       </BaseButton>
     </li>
@@ -131,21 +135,7 @@ const getButtonText = (isRead: boolean) => {
   }
 
   &__item-button {
-    display: inline-flex;
-    align-items: center;
     margin-left: auto;
-    padding: 8px 24px;
-    color: var(--color-text, #8694a7);
-    border: 1px solid var(--color-border, #e4ebf4);
-    border-radius: 15px;
-    background: #ffffff;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: calc(24 / 14);
-
-    &:hover {
-      border: 1px solid var(--color-primary, #754eff);
-    }
   }
 }
 

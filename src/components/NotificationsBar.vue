@@ -100,14 +100,14 @@ watch(filterText, () => {
     <BaseButton
       v-if="filterCaseId !== CaseID.All"
       class="notifications-bar__reset-button"
-      @button-click="clearFilter"
+      @click="clearFilter"
     >
       Сбросить
     </BaseButton>
     <BaseButton
       aria-label="Обновить список"
       class="notifications-bar__update-button"
-      @button-click="updateNotificationList"
+      @click="updateNotificationList"
     >
       <BaseIcon icon-name="update" class="notifications-bar__update-button-icon" />
     </BaseButton>
