@@ -102,6 +102,7 @@ export const useNotificationsStore = defineStore('notifications', () => {
 
   return {
     notificationCasesByID,
+    notificationsByID,
     notifications,
     filterCaseID,
     notificationsFilteredByCase,
